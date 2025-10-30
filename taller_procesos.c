@@ -6,10 +6,12 @@
 *          - Juan David Daza Caro                         *
 * Fecha: 30 Octubre de 2025                               *
 * Docente: J. Corredor                                    *
-* Objetivo: Aplicar los conceptos de procesos    	  *
-*	    comunicación entre procesos                   *
+* Objetivo: Aplicar los conceptos de procesos    	      *
+*	    comunicación entre procesos                       *
 *                                                         *
-* Descripción:                                            *
+* Descripción: Programa que utiliza procesos (pipes)      *
+*            para leer números de dos archivos, calcular  *
+*            sus sumas parciales y la suma total.         *                                   *
 ***********************************************************/
 
 
@@ -20,6 +22,9 @@
 #include <string.h>
 #include <sys/wait.h>
 
+int* leer_archivo(char *nombre, int n);
+int suma_arreglo(int *arr, int n);
+//funcion para leer el archivo
 int* leer_archivo(char *nombre, int n) {
     FILE *arch = fopen(nombre, "r");
     if  (arch == NULL) {
@@ -36,8 +41,16 @@ int* leer_archivo(char *nombre, int n) {
     return arr;
 }
 
-int* leer_archivo(char *nombre, int n);
-int suma_arreglo(int *arr, int n);
+//funcion con algoritmo basico de suma de arreglos
+
+int suma_arreglo(int *arr, int n) {
+    int suma = 0;
+    for (int i = 0; i < n; i++){
+          suma += arr[i];
+        }
+    return suma;
+}
+
 
 int main(int argc, char *argv[]) {
     if (argc != 5) {
@@ -122,13 +135,5 @@ int main(int argc, char *argv[]) {
   return 0;
 
 }
-//funcion con algoritmo basico de suma de arreglos
 
-int suma_arreglo(int *arr, int n) {
-    int suma = 0;
-    for (int i = 0; i < n; i++){
-          suma += arr[i];
-        }
-    return suma;
-}
 
